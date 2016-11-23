@@ -7,7 +7,7 @@ print "x=", a, "mod", p
 print "x=", b, "mod", q
 print " "
 #We need to find the value of x using Chinese Remainder Theorem
-for i in range(1,p*q):
+for i in range(0,p*q):
     if (i%p == a) and (i%q == b):
         x = i
 print "The value of x is : ",x
