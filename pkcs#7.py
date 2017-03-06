@@ -6,7 +6,7 @@ print "Length of the string given as input: ",l
 
 if n>l:
     padlen = n % l
-else:
+elif n<l:
     i=2;
     while i<50000:
         temp = n
@@ -15,6 +15,9 @@ else:
             padlen = temp % l
             break
         i += 1
+else:
+    padlen = n
+
 
 padbyte = hex(padlen).replace("0x","")
 print "The byte to be padded at the end of the string: ",padbyte
