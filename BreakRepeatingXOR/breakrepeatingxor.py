@@ -24,27 +24,33 @@ def hammdist(str1,str2):
             if str1[i] != str2[i]:
                 cnt += 1
         print "The hamming distance is ",cnt
+        return cnt
         
     else:
         exit()
+        
+#def mainattack(
     
 
 
 
 
-fo = open("test.txt","r")
+fo = open("ciphertext.txt","r")
 chars = 0
 str1 = ""
 for line in fo:
     str1 += line
 fo.close()
+list1 = []
 str1 = str1.replace("\n","")
 str1 = str1.decode("base64")
 for i in xrange(2,41):
     block1 = str1[:i]
     block2 = str1[i:2*i]
     print "Hamming for key ",i,": ",
-    hammdist(block1,block2)
+    list1.append(hammdist(block1,block2))
+    
+print list1
 
 
 
