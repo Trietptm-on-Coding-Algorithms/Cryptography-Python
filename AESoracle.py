@@ -46,14 +46,14 @@ def padding(str1):
     l = len(str1)
     padlen = 0
     if 16 > l:
-        padlen = n % l
+        padlen = n - l
     elif 16 < l:
         i = 2
         while i < 50000:
             temp = 16
             temp *= i
             if temp > l:
-                padlen = temp % l
+                padlen = temp - l
                 break
             i += 1
     padbyte = hex(padlen).replace("0x","")
