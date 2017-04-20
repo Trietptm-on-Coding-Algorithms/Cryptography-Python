@@ -1,7 +1,7 @@
 from Crypto.Cipher import AES
 from os import urandom
 
-key = "\xa7\xcc\xef\x03X\xc9\x9e\x108\xed\xe1\x8e \xb9\xc9\x0c"
+key = urandom(16)
 
 
 def padding(string):
@@ -21,43 +21,24 @@ def encryption(key, plaintext):
     cipher = obj.encrypt(plaintext)
     return cipher.encode("hex")
 
-
 secret = "Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkgaGFpciBjYW4gYmxvdwpUaGUgZ2lybGllcyBvbiBzdGFuZGJ5IHdhdmluZyBqdXN0IHRvIHNheSBoaQpEaWQgeW91IHN0b3A/IE5vLCBJIGp1c3QgZHJvdmUgYnkK"
-secret = secret.decode("base64").replace("\n","").replace(" ","")
+secret = secret.decode("base64")
 
-plaintext = raw_input()
-plaintext += secret
-print "length of the text to be encrypted: ",len(plaintext)
-plaintext = padding(plaintext)
-ciphertext = encryption(key, plaintext)
-print "Length of ciphertext: ",len(ciphertext)
-print "Size of ciphertext: ",len(ciphertext)/2
-print ciphertext
-temp = ciphertext
-
-secret = "Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkgaGFpciBjYW4gYmxvdwpUaGUgZ2lybGllcyBvbiBzdGFuZGJ5IHdhdmluZyBqdXN0IHRvIHNheSBoaQpEaWQgeW91IHN0b3A/IE5vLCBJIGp1c3QgZHJvdmUgYnkK"
-secret = secret.decode("base64").replace("\n","").replace(" ","")[1:]
-
-
-for i in xrange(0,255):
-    plaintext = "aaaaaaaaaaaaaaaaaaa"
-    plaintext += chr(i) + secret
-#    print "length of the text to be encrypted: ",len(plaintext)
-    plaintext = padding(plaintext)
-    ciphertext = encryption(key, plaintext)
-#print "Length of ciphertext: ",len(ciphertext)
-#print "Size of ciphertext: ",len(ciphertext)/2
-#print ciphertext
-    if ciphertext == temp:
-        print "Found First byte: ",chr(i)
-        exit()
-print "Wrong Algorithm"
-
-
-
-
-
-
-
+revealed = ""
+for k in xrange(len(secret)/16):
+    b = ""
+    for i in xrange(1,17):
+        prepend = "a"*(16-i)
+        plaintext = prepend + secret[0+k*16:]
+        plaintext = padding(plaintext)
+        ciphertext = encryption(key, plaintext)
+        for j in xrange(256):
+            check = prepend + b + chr(j)
+            encrypted = encryption(key, check)
+            if encrypted == ciphertext[:32]:
+                b += chr(j)
+                break
+    revealed += b
+print revealed
 
 
