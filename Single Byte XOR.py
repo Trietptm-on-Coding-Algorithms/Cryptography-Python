@@ -1,24 +1,9 @@
-str1 = raw_input("Enter hex string: ")
-str1 = list(str1)
-for i in xrange(len(str1)-1):
-    if i % 2 != 0:
-        str1[i] = str1[i] + " "
-str1 = ''.join(str1)
-str1 = str1.split(" ")
-temp = str1
+ct = raw_input("Enter ciphertext: ")           
 
-for j in xrange(1,257):
-    fl = 0
-    str1 = temp
-    for i in xrange(len(str1)):
-        str1[i] = hex(int(str1[i],16) ^ j)
-        str1[i] = str1[i].replace("0x","")
-    str1 = ''.join(str1)
-    if(len(str1)%2!=0):
-        str1 = "0"+str1
-    str1 = str1.decode("hex")
-    print str1
+list1 = [ct[i]+ct[i+1] for i in range(0,len(ct),2)]
+for i in range(255):
+    pt = ""
+    for j in range(len(list1)):
+        pt += hex(int(list1[j],16) ^ i)[2:].zfill(2)
+    print pt.decode("hex")
     
-            
-
-

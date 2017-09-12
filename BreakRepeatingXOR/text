@@ -1,0 +1,15 @@
+Replying to [comment:6 dimpase]:
+> what do you mean to say by
+> {{{
+> +    In case one of the solutions while solving an equation is a real number::
+> }}}
+> First of all, I would have written
+> {{{
+> +    In case one of the solutions of an equation is a real number::
+> }}}
+It was a part of ticket #21554 which has already been merged.
+
+> Still, it's unclear what the following sequence of assumptions following this line has 
+> to do with the one of solutions being real. Do you mean to say that in order to make sure that one (rather, every?) solution is real, you need to make the following assumptions? Something else?
+
+According to the documentation, the solution of the equation described in the issue is r1, which is a real number (That is what the documentation says!). But the solution to this equation can be a complex number too! So, I just changed the documentation and redefined r1 to be any arbitrary constant. You can refer to this conversation: https://groups.google.com/forum/#!topic/sage-support/_XWjrYjk_3A 

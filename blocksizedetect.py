@@ -5,6 +5,7 @@ from Crypto.Random import random
 list1 = [16,32,64]
 block = random.choice([16,32,64])
 key = urandom(16)
+print block
 
 
 def padding(string, blocksize):
